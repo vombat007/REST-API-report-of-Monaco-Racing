@@ -1,9 +1,13 @@
 import report_racing as rr
 from flask import Flask, request
-from flask import render_template
+from flask import render_template, make_response
+from flask_restful import Resource, Api
+from flasgger import Swagger
 from flask import url_for
 
 app = Flask(__name__)
+api = Api(app)
+swagger = Swagger(app)
 app.config['DEBUG'] = True
 app.config['STATIC_FOLDER'] = 'data'
 
@@ -15,12 +19,12 @@ def sort_asc_desc(folder, key):
     return rr.sort_report(rr.error_code_and_zero(rr.build_report(folder)), key)
 
 
-@app.route("/")
-def home():
-    """
-    create home page and return html template with title and navigation link
-    """
-    return render_template("base.html", title="WEB Report of Monaco 2018 Racing")
+class Home(Resource):
+    def get(self):
+        return make_response(render_template("base.html", title="WEB Report of Monaco 2018 Racing"))
+
+
+api.add_resource(Home, '/')
 
 
 @app.route("/report")
@@ -68,4 +72,4 @@ def driver_links():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
