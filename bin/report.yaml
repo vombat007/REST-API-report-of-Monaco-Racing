@@ -3,17 +3,19 @@ It works also with swag_from, schemas and spec_dict
 ---
 parameters:
  - in: path
-   name: report
+   enum: ["order", "driver"]
+   name: format
    type: string
    format: json
+   description: order
    required: true
+
+definitions:
+  report:
+
 responses:
   200:
-    description: Report Monaco Racing
-    schema:
-      id: User
-      properties:
-        username:
-          type: string
-          description: The report and abbr of racers
-          default: Report Monaco Racing 2018
+    content:
+      application/json:
+        schema:
+          $ref: "#/definitions/report"

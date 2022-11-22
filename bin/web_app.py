@@ -14,6 +14,7 @@ app.config['SWAGGER'] = {
     'uiversion': 3,
     "specs_route": "/swagger/"
 }
+
 swagger = Swagger(app)
 app.config.from_object(config.Config)
 api = Api(app)
@@ -54,10 +55,9 @@ class Report(Resource):
         #           default: Steven Wilson
         # """
         report = sort_asc_desc(app.config.get('STATIC_FOLDER'), 'asc')
-        j = json.dumps(report)
-        g = json.loads(j)
+        report = json.dumps(report)
 
-        return
+        return report
 
 
 api.add_resource(Report, '/report', endpoint='report')
