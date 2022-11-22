@@ -3,8 +3,7 @@ It works also with swag_from, schemas and spec_dict
 ---
 parameters:
  - in: path
-   enum: ["order", "driver"]
-   name: format
+   name: report
    type: string
    format: json
    description: order

@@ -55,12 +55,11 @@ class Report(Resource):
         #           default: Steven Wilson
         # """
         report = sort_asc_desc(app.config.get('STATIC_FOLDER'), 'asc')
-        report = json.dumps(report)
 
-        return report
+        return jsonify(report)
 
 
-api.add_resource(Report, '/report', endpoint='report')
+api.add_resource(Report, '/api/v1/report/', endpoint='report')
 # api.init_app(app)
 
 if __name__ == "__main__":
