@@ -1,20 +1,41 @@
 This examples uses FlaskRESTful Resource
 It works also with swag_from, schemas and spec_dict
 ---
+tags:
+  - name:
+    description: Show Report Monaco racing 2018
+
 parameters:
- - in: path
-   name: report
+ - name: status
+   in: path
    type: string
-   format: json
-   description: order
-   required: true
+   enum: ['get full report']
+   description: report racing
+   required: false
+   explode: true
+   default: get report
+   schema:
+     type: string
+     default: get full report
+     enum:
+       - get full report
 
 definitions:
   report:
+    type: object
+    properties:
+      report:
+        type: array
+        item:
+          $ref: '#/definitions/Report'
+  Report:
+    type: string
+
 
 responses:
   200:
+    description: Successful response
     content:
       application/json:
         schema:
-          $ref: "#/definitions/report"
+        $ref: '#/definitions/Report'

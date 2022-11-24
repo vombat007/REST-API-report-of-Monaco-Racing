@@ -59,7 +59,7 @@ class Report(Resource):
         return jsonify(report)
 
 
-api.add_resource(Report, '/api/v1/report/', endpoint='report')
+api.add_resource(Report, '/api/v1/report', endpoint='report')
 # api.init_app(app)
 
 if __name__ == "__main__":
