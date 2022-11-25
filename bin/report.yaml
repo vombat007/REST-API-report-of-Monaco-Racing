@@ -10,9 +10,8 @@ parameters:
    in: path
    type: string
    enum: ['get full report']
-   description: report racing
-   required: false
-   explode: true
+   description: show all drivers statistic
+   required: true
    default: get report
    schema:
      type: string
