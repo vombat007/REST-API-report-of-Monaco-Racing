@@ -13,11 +13,18 @@ parameters:
    description: show all drivers statistic
    required: true
    default: get report
+
+ - name: format
+   in: query
+   type: string
+   enum:
+     - json
+   description: format of request
    schema:
      type: string
-     default: get full report
+     default: json
      enum:
-       - get full report
+       - full report
 
 definitions:
   report:

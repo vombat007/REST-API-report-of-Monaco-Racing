@@ -33,8 +33,9 @@ class Report(Resource):
     @swag_from('report.yaml', endpoint='report')
     def get(self):
         report = sort_asc_desc(app.config.get('STATIC_FOLDER'), 'asc')
+        request_format = request.args.get('format', type=str)
 
-        if request.args.get('format') == "json":
+        if request_format == "json":
             return jsonify(report)
         else:
             return 'Error Wrong args'
