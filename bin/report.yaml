@@ -6,20 +6,15 @@ tags:
     description: Show Report Monaco racing 2018
 
 parameters:
- - name: status
-   in: path
-   type: string
-   enum: ['get full report']
-   description: show all drivers statistic
-   required: true
-   default: get report
 
  - name: format
    in: query
    type: string
    enum:
      - json
-   description: format of request
+   description: argument of request
+   required: true
+   default: json
    schema:
      type: string
      default: json

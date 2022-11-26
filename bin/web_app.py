@@ -24,7 +24,7 @@ app.config['STATIC_FOLDER'] = 'data'
 
 def sort_asc_desc(folder, key):
     """
-    import sort function from report_racing packege and return sort dict by key asc or desc
+    import sort function from report_racing package and return sort dict by key asc or desc
     """
     return rr.sort_report(rr.error_code_and_zero(rr.build_report(folder)), key)
 
@@ -38,7 +38,8 @@ class Report(Resource):
         if request_format == "json":
             return jsonify(report)
         else:
-            return 'Error Wrong args'
+            return 'Error Wrong format', 400
+
 
 
 api.add_resource(Report, '/api/v1/report/', endpoint='report')
