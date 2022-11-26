@@ -12,6 +12,7 @@ parameters:
    type: string
    enum:
      - json
+     - xml
    description: argument of request
    required: true
    default: json
