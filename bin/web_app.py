@@ -44,12 +44,11 @@ class Report(Resource):
 
 
 class DriverID(Resource):
-    # @swag_from('swagger/report_id.yml', endpoint='report_id')
+    @swag_from('docs/report_id.yml', endpoint='report_id')
     def get(self, driver_id):
         report = sort_asc_desc(app.config.get('STATIC_FOLDER'), 'asc')
 
-        if driver_id in report.keys():
-
+        if driver_id in report:
             return jsonify(report[driver_id])
 
         else:
@@ -57,7 +56,7 @@ class DriverID(Resource):
 
 
 api.add_resource(Report, '/api/v1/report/', endpoint='report')
-api.add_resource(DriverID, '/api/v1/report/<driver_id>', endpoint='report_id')
+api.add_resource(DriverID, '/api/v1/report/<driver_id>/', endpoint='report_id')
 # api.init_app(app)
 
 if __name__ == "__main__":
