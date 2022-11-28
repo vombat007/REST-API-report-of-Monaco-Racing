@@ -1,5 +1,4 @@
 This examples uses FlaskRESTful Resource
-It works also with swag_from, schemas and spec_dict
 ---
 tags:
   - name:
@@ -13,7 +12,7 @@ parameters:
    enum:
      - json
      - xml
-   description: argument of request
+   description: return all report
    required: true
    default: json
    schema:
@@ -37,7 +36,5 @@ definitions:
 responses:
   200:
     description: Successful response
-    content:
-      application/json:
-        schema:
-        $ref: '#/definitions/Report'
+    schema:
+      $ref: '#/definitions/Report'

@@ -1,0 +1,33 @@
+This examples uses FlaskRESTful Resource
+---
+tags:
+  - name:
+    description: Show Report Monaco racing 2018
+
+parameters:
+ - name: driver_id
+   in: path
+   type: string
+   enum:
+   description: id of driver to return driver report
+   required: true
+
+definitions:
+  Driver:
+    type: object
+    properties:
+      driver_name:
+        type: array
+        items:
+          $ref: '#/definitions/ID'
+  ID:
+    type: string
+
+
+responses:
+  200:
+    description: Successful response
+    schema:
+      $ref: '#/definitions/Driver'
+    examples:
+      DRR: ["place": "16", "name": "Daniel Ricciardo","team": "RED BULL RACING TAG HEUER", "time": "Error time"]

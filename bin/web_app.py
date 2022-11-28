@@ -55,6 +55,7 @@ class DriverID(Resource):
             return 'Error Wrong format', 400
 
 
+
 api.add_resource(Report, '/api/v1/report/', endpoint='report')
 api.add_resource(DriverID, '/api/v1/report/<driver_id>/', endpoint='report_id')
 # api.init_app(app)
