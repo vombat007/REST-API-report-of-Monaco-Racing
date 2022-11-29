@@ -29,3 +29,16 @@ class TestClass:
         response = app.test_client().get('/api/v1/report/order/')
         assert response.status_code == 200
 
+    def test_driver_id(self):
+        response = app.test_client().get('/api/v1/report/DRR/')
+        assert b"16" in response.data
+        assert b"Daniel Ricciardo" in response.data
+        assert b"RED BULL RACING TAG HEUER" in response.data
+        assert b"Error time" in response.data
+
+    def test_order(self):
+        response = app.test_client().get('/api/v1/report/order/')
+        assert b"18" in response.data
+        assert b"Esteban Ocon" in response.data
+        assert b"FORCE INDIA MERCEDES" in response.data
+        assert b"Error time" in response.data

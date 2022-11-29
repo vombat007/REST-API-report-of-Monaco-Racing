@@ -64,7 +64,6 @@ api.add_resource(Report, '/api/v1/report/', endpoint='report')
 api.add_resource(DriverID, '/api/v1/report/<driver_id>/', endpoint='report_id')
 api.add_resource(ReportOrder, '/api/v1/report/order/', endpoint='order')
 
-# api.init_app(app)
 
 if __name__ == "__main__":
     app.run(debug=True)
