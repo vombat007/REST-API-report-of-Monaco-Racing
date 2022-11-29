@@ -1,10 +1,7 @@
 import report_racing as rr
 from flask import Flask, request, jsonify
-from flask import render_template, make_response
-from flask_restful import Resource, Api, reqparse
+from flask_restful import Resource, Api
 from flasgger import Swagger, swag_from
-from flask import url_for
-import json
 import config
 
 
@@ -55,9 +52,18 @@ class DriverID(Resource):
             return 'Error Wrong format', 400
 
 
+class ReportOrder(Resource):
+    @swag_from('docs/order.yml', endpoint='order')
+    def get(self):
+        report = sort_asc_desc(app.config.get('STATIC_FOLDER'), 'desc')
+
+        return jsonify(report)
+
 
 api.add_resource(Report, '/api/v1/report/', endpoint='report')
 api.add_resource(DriverID, '/api/v1/report/<driver_id>/', endpoint='report_id')
+api.add_resource(ReportOrder, '/api/v1/report/order/', endpoint='order')
+
 # api.init_app(app)
 
 if __name__ == "__main__":
