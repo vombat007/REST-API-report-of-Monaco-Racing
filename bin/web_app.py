@@ -16,7 +16,7 @@ swagger = Swagger(app)
 app.config.from_object(config.Config)
 api = Api(app)
 app.config['DEBUG'] = True
-app.config['JSON_SORT_KEYS'] = False
+app.json.sort_keys = False
 app.config['STATIC_FOLDER'] = 'data'
 
 

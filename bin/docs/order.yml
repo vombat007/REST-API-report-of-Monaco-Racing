@@ -2,7 +2,7 @@ This examples uses FlaskRESTful Resource
 ---
 tags:
   - name:
-    description: Show Order Report Monaco racing 2018
+    description: Show Report Monaco racing 2018
 
 parameters:
 
