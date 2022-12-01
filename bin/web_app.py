@@ -32,9 +32,21 @@ class Report(Resource):
     def get(self):
         report = sort_asc_desc(app.config.get('STATIC_FOLDER'), 'asc')
         request_format = request.args.get('format', type=str)
+        request_order = request.args.get('order', type=str)
 
-        if request_format == "json":
+        if request_format == "json" and request_order == "asc":
             return jsonify(report)
+
+        if request_format == "json" and request_order == "desc":
+            report = sort_asc_desc(app.config.get('STATIC_FOLDER'), 'desc')
+            return jsonify(report)
+
+        if request_format == "xml" and request_order == "asc":
+            pass
+
+        if request_format == "xml" and request_order == "desc":
+            report = sort_asc_desc(app.config.get('STATIC_FOLDER'), 'desc')
+            pass
 
         else:
             return 'Error Wrong format', 400
@@ -52,17 +64,8 @@ class DriverID(Resource):
             return 'Error Wrong format', 400
 
 
-class ReportOrder(Resource):
-    @swag_from('docs/order.yml', endpoint='order')
-    def get(self):
-        report = sort_asc_desc(app.config.get('STATIC_FOLDER'), 'desc')
-
-        return jsonify(report)
-
-
 api.add_resource(Report, '/api/v1/report/', endpoint='report')
 api.add_resource(DriverID, '/api/v1/report/<driver_id>/', endpoint='report_id')
-api.add_resource(ReportOrder, '/api/v1/report/order/', endpoint='order')
 
 
 if __name__ == "__main__":

@@ -12,12 +12,27 @@ parameters:
    enum:
      - json
      - xml
-   description: return all report
+   description: chose format to return
    required: true
    default: json
    schema:
      type: string
      default: json
+     enum:
+       - full report
+
+ - name: order
+   in: query
+   type: string
+   enum:
+     - asc
+     - desc
+   description: return  all report by chose format
+   required: true
+   default: asc
+   schema:
+     type: string
+     default: asc
      enum:
        - full report
 
