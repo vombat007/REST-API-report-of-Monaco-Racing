@@ -13,32 +13,29 @@ class TestClass:
             'time': '1:04.415'
                                  }
 
-    def test_none_index_route(self):
-        response = app.test_client().get('/none')
-        assert response.status_code == 404
+    def test_report_asc(self):
+        response = app.test_client().get('/api/v1/report/?format=json&order=asc')
+        assert {'name': 'Charles Leclerc',
+                'place': '6',
+                'team': 'SAUBER FERRARI',
+                'time': '1:12.829'} == response.get_json()['CLS']
 
-    def test_report_route(self):
-        response = app.test_client().get('/api/v1/report/?format=json')
-        assert response.status_code == 200
-
-    def test_driver_id_route(self):
-        response = app.test_client().get('/api/v1/report/DRR/')
-        assert response.status_code == 200
-
-    def test_order_route(self):
-        response = app.test_client().get('/api/v1/report/order/')
-        assert response.status_code == 200
+    def test_report_desc(self):
+        response = app.test_client().get('/api/v1/report/?format=json&order=desc')
+        assert {'name': 'Sebastian Vettel',
+                'place': '1',
+                'team': 'FERRARI',
+                'time': '1:04.415'} == response.get_json()['SVF']
 
     def test_driver_id(self):
         response = app.test_client().get('/api/v1/report/DRR/')
-        assert b"16" in response.data
-        assert b"Daniel Ricciardo" in response.data
-        assert b"RED BULL RACING TAG HEUER" in response.data
-        assert b"Error time" in response.data
+        assert {'response': {'name': 'Daniel Ricciardo',
+                             'place': '16',
+                             'team': 'RED BULL RACING TAG HEUER',
+                             'time': 'Error time'}} == response.get_json()
 
-    def test_order(self):
-        response = app.test_client().get('/api/v1/report/order/')
-        assert b"18" in response.data
-        assert b"Esteban Ocon" in response.data
-        assert b"FORCE INDIA MERCEDES" in response.data
-        assert b"Error time" in response.data
+
+
+
+
+

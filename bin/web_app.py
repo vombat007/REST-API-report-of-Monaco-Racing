@@ -63,6 +63,9 @@ class Report(Resource):
             report = sort_asc_desc(app.config.get('STATIC_FOLDER'), 'desc')
             return report
 
+        elif request_format == "xml":
+            pass
+
         else:
             return 'Error Wrong format', 400
 

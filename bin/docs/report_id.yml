@@ -3,6 +3,7 @@ This examples uses FlaskRESTful Resource
 tags:
   - name:
     description: Show Report Monaco racing 2018
+
 produces:
   - "application/json"
   - "application/xml"
@@ -11,7 +12,6 @@ parameters:
  - name: driver_id
    in: path
    type: string
-   enum:
    description: id of driver to return driver report
    required: true
 
@@ -28,7 +28,7 @@ definitions:
 
 
 responses:
-  200:
+ 200:
     description: Successful response
     schema:
       $ref: '#/definitions/Driver'
