@@ -4,14 +4,15 @@ tags:
   - name:
     description: Show Report Monaco racing 2018
 
-parameters:
+produces:
+  - "application/json"
+  - "application/xml"
 
+parameters:
  - name: format
    in: query
    type: string
-   enum:
-     - json
-     - xml
+   enum: [json, xml]
    description: chose format to return
    required: true
    default: json
