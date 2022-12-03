@@ -74,7 +74,7 @@ class DriverID(Resource):
         report = sort_asc_desc(app.config.get('STATIC_FOLDER'), 'asc')
 
         if driver_id in report:
-            return jsonify(report[driver_id])
+            return report[driver_id]
 
         else:
             return 'Error Wrong format', 400

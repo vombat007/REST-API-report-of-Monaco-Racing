@@ -3,6 +3,9 @@ This examples uses FlaskRESTful Resource
 tags:
   - name:
     description: Show Report Monaco racing 2018
+produces:
+  - "application/json"
+  - "application/xml"
 
 parameters:
  - name: driver_id
