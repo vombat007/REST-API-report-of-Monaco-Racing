@@ -6,7 +6,6 @@ import config
 from simplexml import dumps
 import json
 
-
 app = Flask(__name__)
 app.config['SWAGGER'] = {
     'title': 'API Report Racing',
