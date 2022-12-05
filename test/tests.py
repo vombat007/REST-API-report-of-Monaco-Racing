@@ -34,10 +34,17 @@ class TestClass:
                              'team': 'RED BULL RACING TAG HEUER',
                              'time': 'Error time'}} == response.get_json()
 
-
-
-
     def test_report_asc_xml(self):
         response = app.test_client().get('/api/v1/report/?format=xml&order=asc')
-        assert 'f' == response.get_data()
+        assert b'<?xml version="1.0" encoding="UTF-8" ?>' in response.get_data()
+        assert b'<name>Sebastian Vettel</name>' in response.get_data()
+        assert b'<team>WILLIAMS MERCEDES</team>' in response.get_data()
+        assert b'<time>Error time</time>' in response.get_data()
+
+    def test_report_desc_xml(self):
+        response = app.test_client().get('/api/v1/report/?format=xml&order=desc')
+        assert b'<?xml version="1.0" encoding="UTF-8" ?>' in response.get_data()
+        assert b'<name>Sebastian Vettel</name>' in response.get_data()
+        assert b'<team>WILLIAMS MERCEDES</team>' in response.get_data()
+        assert b'<time>Error time</time>' in response.get_data()
 
