@@ -37,5 +37,7 @@ class TestClass:
 
 
 
-
+    def test_report_asc_xml(self):
+        response = app.test_client().get('/api/v1/report/?format=xml&order=asc')
+        assert 'f' == response.get_data()
 

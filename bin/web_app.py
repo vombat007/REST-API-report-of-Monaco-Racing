@@ -1,10 +1,12 @@
 import report_racing as rr
-from flask import Flask, request, jsonify, make_response
+from flask import Flask, request, jsonify, make_response, Response
 from flask_restful import Resource, Api
 from flasgger import Swagger, swag_from
 import config
 from simplexml import dumps
 import json
+import dicttoxml
+
 
 app = Flask(__name__)
 app.config['SWAGGER'] = {
@@ -45,26 +47,16 @@ def sort_asc_desc(folder, key):
 class Report(Resource):
     @swag_from('docs/report.yaml', endpoint='report')
     def get(self):
-        report = sort_asc_desc(app.config.get('STATIC_FOLDER'), 'asc')
         request_format = request.args.get('format', type=str)
         request_order = request.args.get('order', type=str)
+        report = sort_asc_desc(app.config.get('STATIC_FOLDER'), request_order)
+        xml = dicttoxml.dicttoxml(report, custom_root='report', attr_type=False)
 
-        if request_format == "json" and request_order == "asc":
+        if request_format == "json":
             return jsonify(report)
-
-        if request_format == "json" and request_order == "desc":
-            report = sort_asc_desc(app.config.get('STATIC_FOLDER'), 'desc')
-            return jsonify(report)
-
-        if request_format == "xml" and request_order == "asc":
-            return report
-
-        if request_format == "xml" and request_order == "desc":
-            report = sort_asc_desc(app.config.get('STATIC_FOLDER'), 'desc')
-            return report
 
         elif request_format == "xml":
-            pass
+            return Response(xml, mimetype='text/xml')
 
         else:
             return 'Error Wrong format', 400
