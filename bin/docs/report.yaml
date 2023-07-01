@@ -1,0 +1,56 @@
+This examples uses FlaskRESTful Resource
+---
+tags:
+  - name:
+    description: Show Report Monaco racing 2018
+
+produces:
+  - "application/json"
+  - "application/xml"
+
+parameters:
+ - name: format
+   in: query
+   type: string
+   enum: [json, xml]
+   description: chose format to return
+   required: true
+   default: json
+   schema:
+     type: string
+     default: json
+     enum:
+       - full report
+
+ - name: order
+   in: query
+   type: string
+   enum:
+     - asc
+     - desc
+   description: return  all report by chose format
+   required: true
+   default: asc
+   schema:
+     type: string
+     default: asc
+     enum:
+       - full report
+
+definitions:
+  report:
+    type: object
+    properties:
+      report:
+        type: array
+        item:
+          $ref: '#/definitions/Report'
+  Report:
+    type: string
+
+
+responses:
+  200:
+    description: Successful response
+    schema:
+      $ref: '#/definitions/Report'
